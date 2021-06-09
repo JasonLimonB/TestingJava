@@ -1,16 +1,15 @@
 package com.jason.training.junit;
 
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GreetingImplTest{
 
     IGreeting greeting;
 
-    @Before
+    @BeforeEach
     public void setup(){
         System.out.println("Setup");
         greeting = new GreetingImpl();
@@ -19,24 +18,24 @@ public class GreetingImplTest{
     @Test
     public void testGreetHelloUsingValidOutput(){
         System.out.println("firsTest");
-        assertNotNull(greeting.greetHello("JUnit"));
-        assertEquals("Hello JUnit", greeting.greetHello("JUnit"));
+        Assertions.assertNotNull(greeting.greetHello("JUnit"));
+        Assertions.assertEquals("Hello JUnit", greeting.greetHello("JUnit"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGreetHelloShouldThrowException_WhenParameterIsNull(){
         System.out.println("Second Test");
-        greeting.greetHello(null);
+        Assertions.assertThrows(IllegalArgumentException.class, ()->greeting.greetHello(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGreetHelloShouldThrowException_WhenParameterIsBlank(){
         System.out.println("Third test");
-        greeting.greetHello("");
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> greeting.greetHello("") );
     }
 
 
-    @After
+    @AfterEach
     public void tearDown(){
         System.out.println("Tear down");
         greeting = null;
