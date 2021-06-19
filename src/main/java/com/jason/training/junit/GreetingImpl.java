@@ -8,7 +8,7 @@ public class GreetingImpl implements IGreeting{
         if (name == null || name.isEmpty() )
             throw new IllegalArgumentException();
 
-        return "Hello ".concat(name);
+        return "Hello " + name;
     }
 
 }
